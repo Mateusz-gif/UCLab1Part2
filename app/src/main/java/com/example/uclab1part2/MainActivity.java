@@ -1,7 +1,6 @@
 package com.example.uclab1part2;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -11,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    int secretNumber;
+    int numberOfGuesses = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +26,41 @@ public class MainActivity extends AppCompatActivity {
         Button guessButton = findViewById(R.id.guessButton);
         TextView result = findViewById(R.id.result);
         TextView guessCount = findViewById(R.id.guessCount);
-        TextView playAgain = findViewById(R.id.playAgain);
+        Button playAgain = findViewById(R.id.playAgain);
 
+        guessButton.setOnClickListener(v -> {
 
+            String guessText = guess.getText().toString();
 
+            if (guessText.isEmpty()) {
+                result.setText("Enter a number");
+                return;
+            }
+
+            int userGuess = Integer.parseInt(guessText);
+
+            if (userGuess < 1 || userGuess > 30) {
+                result.setText("Enter a number between 1 and 30");
+                return;
+            }
+
+            numberOfGuesses++;
+
+            guessCount.setText(
+                    "Number of guesses: " + numberOfGuesses
+            );
+
+            if (userGuess < secretNumber) {
+                result.setText("Higher!");
+            }
+            else if (userGuess > secretNumber) {
+                result.setText("Lower!");
+            }
+            else {
+                result.setText("Correct!");
+            }
+
+            guess.setText("");
+        });
     }
 }
