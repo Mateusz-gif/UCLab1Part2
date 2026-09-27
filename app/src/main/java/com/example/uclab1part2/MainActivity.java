@@ -17,5 +17,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Random random = new Random();
+        secretNumber = random.nextInt(30) + 1;
+
+        EditText guess = findViewById(R.id.guess);
+        Button guessButton = findViewById(R.id.guessButton);
+        TextView result = findViewById(R.id.result);
+        TextView guessCount = findViewById(R.id.guessCount);
+        TextView playAgain = findViewById(R.id.playAgain);
+
+
+
     }
 }
