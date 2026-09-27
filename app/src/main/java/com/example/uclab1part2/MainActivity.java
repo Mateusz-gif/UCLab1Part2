@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Random;
@@ -58,9 +58,24 @@ public class MainActivity extends AppCompatActivity {
             }
             else {
                 result.setText("Correct!");
+                playAgain.setVisibility(View.VISIBLE);
+                guessButton.setEnabled(false);
             }
 
             guess.setText("");
+        });
+
+        playAgain.setOnClickListener(v ->{
+
+            secretNumber = random.nextInt(30) + 1;
+            numberOfGuesses = 0;
+
+            result.setText("");
+            guessCount.setText("Number of guesses: 0");
+            guess.setText("");
+
+            guessButton.setEnabled(true);
+            playAgain.setVisibility(View.GONE);
         });
     }
 }
